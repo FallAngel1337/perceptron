@@ -1,16 +1,16 @@
-class Perceptron():
-    def __init__(self, inputs, weights, bias=0):
-        if len(inputs) != len(weights):
-            print('Number of inputs must match the number of weights')
-            return None
+class Perceptron():      
+    def activate_function(inputs, weights, bias=3):
+        assert(len(inputs) > 0 and len(weights) > 0)
 
-        self.inputs = inputs
-        self.weights = weights
-        self.bias = bias
-        
-    def activate_function(self):
+        if len(inputs) == 1:
+            inputs.append(inputs[0])
+
+        if len(inputs) > len(weights) and len(weights) == 1:
+            for _ in range(len(weights)):
+                weights.append(weights[0])
+
         prod = 0
-        for i in range(len(self.inputs)):
-            prod += self.inputs[i] * self.weights[i]
-            
-        return 1 if prod + self.bias > 0 else 0
+        for i in range(len(inputs)):
+            prod += inputs[i] * weights[i]
+        
+        return 1 if prod + bias > 0 else 0
